@@ -162,7 +162,7 @@ ENDFORM.
 *&---------------------------------------------------------------------*
 FORM get_text_of_field .
 
-  gt_field = zcl_pp_common=>build_fieldcat_from_structure( gc_stru ).
+  gt_field = zcl_pp_common=>build_fieldcat_from_structure( gc_stru1 ).
 
 ENDFORM.
 *&---------------------------------------------------------------------*
@@ -173,6 +173,18 @@ FORM set_display_data .
   DATA : lt_list LIKE gt_list,
          ls_list LIKE LINE OF gt_list.
 
+  REFRESH gt_error.
 
+ENDFORM.
+*&---------------------------------------------------------------------*
+*& Form get_data
+*&---------------------------------------------------------------------*
+FORM get_data .
+
+  SELECT ZCMT7000~phone,
+         ZCMT7000~name
+
+    FROM ZCMT7000
+  INTO CORRESPONDING FIELDS OF TABLE @gt_disp.
 
 ENDFORM.
