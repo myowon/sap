@@ -146,13 +146,15 @@ FORM get_excel_data .
     ENDAT.
   ENDLOOP.
 
-  LOOP AT gt_excel INTO DATA(gs_excel).
+  LOOP AT gt_excel INTO gs_excel.
     gs_table-mandt = sy-mandt.
     gs_table-name = gs_excel-name.
     gs_table-phone = gs_excel-phone.
     APPEND gs_table TO gt_table.
     CLEAR gs_table.
   ENDLOOP.
+
+  INSERT ZCMT7000 FROM TABLE gt_table ACCEPTING DUPLICATE KEYS.
 
 ENDFORM.
 *&---------------------------------------------------------------------*
